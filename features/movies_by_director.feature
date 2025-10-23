@@ -32,3 +32,17 @@ Scenario: can't find similar movies if we don't know director (sad path)
   When  I follow "Find Movies With Same Director"
   Then  I should be on the home page
   And   I should see "'Alien' has no director info"
+
+Scenario: create a new movie
+  When I go to the new movie page
+  And I fill in "Title" with "The Matrix"
+  And I select "R" from "Rating"
+  And I press "Save Changes"
+  Then I should be on the RottenPotatoes home page
+  And I should see "The Matrix was successfully created"
+
+Scenario: delete a movie
+  Given I am on the details page for "Alien"
+  When I follow "Delete"
+  Then I should be on the RottenPotatoes home page
+  And I should see "Movie 'Alien' deleted"
